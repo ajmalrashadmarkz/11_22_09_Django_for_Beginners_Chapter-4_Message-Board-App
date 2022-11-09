@@ -66,4 +66,35 @@ ____________________  6. Change the Display Name [post] - Descriptive Naming - A
        ○ __str__() method is called whenever you call str() on an object
             def __str__(self):
                 return self.text[:50]
-                
+
+____________________  6. Setup Template Folder & Home Page  ____________________
+    - Create new directory in the following order
+        ○ pages[...App folder] -> templates [...New Dir] -> pages [...New Dir]
+    - Create Home Page
+        ○ pages\templates\pages\home.html
+
+                    OR
+    - Create new directory templates in project folder
+        ○ django_project -> templates [...New Dir]
+    - Create Home page
+        ○ django_project\templates\home.html
+    - Add templates in django_project/settings.py
+        TEMPLATES = [
+            {
+                ...
+                "DIRS": [BASE_DIR / "templates"], # new
+                ...
+            },
+        ]
+
+____________________  8. Create Class Based Views for home.html  ____________________
+    - posts/views.py
+    - import ListView -> django.view.generic
+    - import Post -> models
+    - Create a class
+        ○ HomePageView(ListView [...Derived Class] ):
+               model = Post [...Class variable]
+               template_name = "webpage name" [...Class variable]
+
+ from django.urls import path
+from .views import HomePageView
