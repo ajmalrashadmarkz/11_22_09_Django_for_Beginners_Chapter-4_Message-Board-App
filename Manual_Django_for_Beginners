@@ -38,3 +38,16 @@ ____________________  3. Create App - posts  ____________________
 	- Migrate the database
 	    ○ python manage.py migrate
 
+____________________  4. Create posts - model  ____________________
+    - posts/models.py
+    - import models [... from db]
+    - Create class name Post
+        Extends to Model detived class [... models.Model]
+        create a variable text [... class -> Text Field , Attribute - Empty]
+            class Post(models.Model):
+                text = models.TextField()
+    - Activating models
+        python manage.py makemigrations posts [... App name -> posts]
+        python manage.py migrate
+
+
