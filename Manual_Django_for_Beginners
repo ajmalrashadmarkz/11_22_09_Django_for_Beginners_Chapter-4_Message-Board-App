@@ -1,0 +1,126 @@
+____________________  1. Initial Set Up - Django_project  ____________________
+
+1. Django 4.1.3 and Python 3.10
+2. Create Directory - Message Board App
+3. Create a virtual environment within this new directory
+    - python -m venv .venv
+    - Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser [..Windows Execution - Enable for running scripts]
+    - .venv\Scripts\Activate.ps1 [.. Activate - virtual environment]
+    - deactivate [..Deactivate and leave a virtual environment type]
+4. Install Django
+    - python -m pip install django~=4.1.3
+5. Pip to be on the latest version
+    - python -m pip install --upgrade pip
+6. Create a new Django project [.. Project Name = django_project]
+    - django-admin startproject django_project .
+7. Add .gitignore
+
+
+____________________ 2. Git SetUp -- Initialisation  ____________________
+    - git init
+    - git status
+    - git config user.name "ajmalrashadmarkz"
+    - git config user.email "ajmalrashadmarkz@gmail.com"
+    - git add .
+    - git commit -m "1. Setup Django Basics files"
+    -  git remote add origin https://github.com/ajmalrashadmarkz/11_22_09_Django_for_Beginners_Chapter-4_Message Board App.git
+    - git push -u origin master
+
+____________________  3. Create App - pages  ____________________
+    - Create pages app
+        ○ python manage.py startapp pages
+    - Register the App
+        ○  django_project/settings.py
+        ○  INSTALLED_APPS = [
+			    .....
+			   "pages.apps.PagesConfig", # new
+			]
+	- Migrate the database
+	    ○ python manage.py migrate
+
+____________________  4. Setup Template Folder & Home Page  ____________________
+    - Create new directory in the following order
+        ○ pages[...App folder] -> templates [...New Dir] -> pages [...New Dir]
+    - Create Home Page
+        ○ pages\templates\pages\home.html
+
+                    OR
+    - Create new directory templates in project folder
+        ○ django_project -> templates [...New Dir]
+    - Create Home page
+        ○ django_project\templates\home.html
+    - Add templates in django_project/settings.py
+        TEMPLATES = [
+            {
+                ...
+                "DIRS": [BASE_DIR / "templates"], # new
+                ...
+            },
+        ]
+
+____________________  5. Create Class Based Views for home.html  ____________________
+    - pages/views.py
+    - import TemplateView -> django.view.generic
+    - Create a class
+        ○ HomePageView(TemplateView [...Derived Class] ):
+               template_name = "webpage name" [...Class variable]
+
+____________________  6. SetUp Url for project and app  ____________________
+    - Create new urls.py file in app folder
+        ○ pages/urls.py
+        ○ import path
+        ○ import HomePageView
+        ○ urlpatterns = [
+                path("", HomePageView.as_view(), name="home" ),
+            ]
+    - Include app url in project url
+        ○ django_project/urls
+        ○ import include -> [... from django.urls]
+        ○ urlpatterns = [
+                path("", include("pages.urls")),
+            ]
+
+____________________  7. Make New page - About  ____________________
+    - Create new page - about.html
+        ○ django_project\templates\about.html
+    - Set up the view for page
+        ○ pages/views.py
+        ○ import TemplateView - django.generic.view
+        ○ Create class
+            - name - AboutPageView
+            - derived Class Template View
+            - Class attribute - template_name = "about.html"
+    - Set up the view for page
+        ○ pages/urls.py
+        ○ import path
+        ○ import AboutPageView
+        ○ Add path in urlpatterns
+            path("about/", AboutPageView.as_view(), name="about"),
+
+____________________  8. Extending Templates - Base.html ____________________
+    - Create a web page - base.html
+        ○ django_project\templates\base.html
+        ○ In Header
+            link - home and about page
+                <a href="{% url "home" %}"></a>
+                <a href="{% url "about" %}"></a>
+        ○ place block
+                {% block content %} {% endblock content %}
+    - update home.html
+        ○  django_project\templates\home.html
+        ○ extends to base class
+            {% extends "base.html" %}
+        ○ Add the contente inside the block
+            {% block content %}
+            <h1>Home Page</h1>
+            {% endblock content %}
+    - update About.html
+        ○ django_project\templates\index.html
+        ○ extends to base class
+            {% extends "base.html" %}
+        ○ Add the contente inside the block
+            {% block content %}
+            <h1> About Page</h1>
+            {% endblock content %}
+
+
