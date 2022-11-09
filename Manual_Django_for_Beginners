@@ -50,7 +50,7 @@ ____________________  4. Create models for posts app  ____________________
         python manage.py makemigrations posts [... App name -> posts]
         python manage.py migrate
 
-____________________  4. Setup Django Admin Interface   ____________________
+____________________  5. Setup Django Admin Interface   ____________________
     - Creation of super user
         python manage.py createsuperuser
     - import admin [... from contrib]
