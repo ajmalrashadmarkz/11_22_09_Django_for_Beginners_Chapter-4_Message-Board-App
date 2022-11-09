@@ -57,3 +57,13 @@ ____________________  5. Setup Django Admin Interface   ____________________
     - import Post [... from models]
     - Register the model with admin.site.register()
         admin.site.register(Post)
+
+____________________  6. Change the Display Name [post] - Descriptive Naming - Automatically ____________________
+    - Descriptive Naming - Automatically
+    -  posts/models.py
+    - Add new function __str__ [... str() methods]
+       ○ model instance methods
+       ○ __str__() method is called whenever you call str() on an object
+            def __str__(self):
+                return self.text[:50]
+                
