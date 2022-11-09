@@ -26,101 +26,15 @@ ____________________ 2. Git SetUp -- Initialisation  ____________________
     -  git remote add origin https://github.com/ajmalrashadmarkz/11_22_09_Django_for_Beginners_Chapter-4_Message Board App.git
     - git push -u origin master
 
-____________________  3. Create App - pages  ____________________
+____________________  3. Create App - posts  ____________________
     - Create pages app
-        ○ python manage.py startapp pages
+        ○ python manage.py startapp posts
     - Register the App
         ○  django_project/settings.py
         ○  INSTALLED_APPS = [
 			    .....
-			   "pages.apps.PagesConfig", # new
+			   "posts.apps.PostsConfig", # new
 			]
 	- Migrate the database
 	    ○ python manage.py migrate
-
-____________________  4. Setup Template Folder & Home Page  ____________________
-    - Create new directory in the following order
-        ○ pages[...App folder] -> templates [...New Dir] -> pages [...New Dir]
-    - Create Home Page
-        ○ pages\templates\pages\home.html
-
-                    OR
-    - Create new directory templates in project folder
-        ○ django_project -> templates [...New Dir]
-    - Create Home page
-        ○ django_project\templates\home.html
-    - Add templates in django_project/settings.py
-        TEMPLATES = [
-            {
-                ...
-                "DIRS": [BASE_DIR / "templates"], # new
-                ...
-            },
-        ]
-
-____________________  5. Create Class Based Views for home.html  ____________________
-    - pages/views.py
-    - import TemplateView -> django.view.generic
-    - Create a class
-        ○ HomePageView(TemplateView [...Derived Class] ):
-               template_name = "webpage name" [...Class variable]
-
-____________________  6. SetUp Url for project and app  ____________________
-    - Create new urls.py file in app folder
-        ○ pages/urls.py
-        ○ import path
-        ○ import HomePageView
-        ○ urlpatterns = [
-                path("", HomePageView.as_view(), name="home" ),
-            ]
-    - Include app url in project url
-        ○ django_project/urls
-        ○ import include -> [... from django.urls]
-        ○ urlpatterns = [
-                path("", include("pages.urls")),
-            ]
-
-____________________  7. Make New page - About  ____________________
-    - Create new page - about.html
-        ○ django_project\templates\about.html
-    - Set up the view for page
-        ○ pages/views.py
-        ○ import TemplateView - django.generic.view
-        ○ Create class
-            - name - AboutPageView
-            - derived Class Template View
-            - Class attribute - template_name = "about.html"
-    - Set up the view for page
-        ○ pages/urls.py
-        ○ import path
-        ○ import AboutPageView
-        ○ Add path in urlpatterns
-            path("about/", AboutPageView.as_view(), name="about"),
-
-____________________  8. Extending Templates - Base.html ____________________
-    - Create a web page - base.html
-        ○ django_project\templates\base.html
-        ○ In Header
-            link - home and about page
-                <a href="{% url "home" %}"></a>
-                <a href="{% url "about" %}"></a>
-        ○ place block
-                {% block content %} {% endblock content %}
-    - update home.html
-        ○  django_project\templates\home.html
-        ○ extends to base class
-            {% extends "base.html" %}
-        ○ Add the contente inside the block
-            {% block content %}
-            <h1>Home Page</h1>
-            {% endblock content %}
-    - update About.html
-        ○ django_project\templates\index.html
-        ○ extends to base class
-            {% extends "base.html" %}
-        ○ Add the contente inside the block
-            {% block content %}
-            <h1> About Page</h1>
-            {% endblock content %}
-
 
