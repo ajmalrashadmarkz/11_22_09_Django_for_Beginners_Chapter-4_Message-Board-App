@@ -87,7 +87,7 @@ ____________________  6. Setup Template Folder & Home Page  ____________________
             },
         ]
 
-____________________  8. Create Class Based Views for home.html  ____________________
+____________________  8. Create Class Based View for model class[...Post]  ____________________
     - posts/views.py
     - import ListView -> django.view.generic
     - import Post -> models
@@ -96,5 +96,17 @@ ____________________  8. Create Class Based Views for home.html  _______________
                model = Post [...Class variable]
                template_name = "webpage name" [...Class variable]
 
- from django.urls import path
-from .views import HomePageView
+____________________  9. SetUp Url for project and app  ____________________
+    - Create new urls.py file in app folder
+        ○ posts/urls.py
+        ○ import path
+        ○ import HomePageView
+        ○ urlpatterns = [
+                path("", HomePageView.as_view(), name="home" ),
+            ]
+    - Include app url in project url
+        ○ django_project/urls
+        ○ import include -> [... from django.urls]
+        ○ urlpatterns = [
+                path("", include("pages.urls")),
+            ]
